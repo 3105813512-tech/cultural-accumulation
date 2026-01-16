@@ -229,7 +229,7 @@ class GoalSequence(MultiAgentEnv):
                 # Only observe object component
                 obs_map = state.map[:, :, 0]
                 # Convert indices to objects
-                obs_map = jax.tree_map(lambda idx: OBJECT_ARRAY[idx], obs_map)
+                obs_map = jax.tree.map(lambda idx: OBJECT_ARRAY[idx], obs_map)
                 demo_obj = lax.select(state.dropped, jnp.zeros_like(OBJECT_ARRAY[OBJECT_TO_INDEX['agent']]),
                                       OBJECT_ARRAY[OBJECT_TO_INDEX['agent']])
                 obs_map = obs_map.at[
@@ -269,7 +269,7 @@ class GoalSequence(MultiAgentEnv):
                 # Only observe object component
                 obs_map = map[:, :, 0]
                 # Convert indices to objects
-                obs_map = jax.tree_map(lambda idx: OBJECT_ARRAY[idx], obs_map)
+                obs_map = jax.tree.map(lambda idx: OBJECT_ARRAY[idx], obs_map)
                 obs_map = obs_map.at[
                           pad + state.goals_pos[0, 1], pad + state.goals_pos[0, 0], :].set(
                     GOAL_ARRAY[0]

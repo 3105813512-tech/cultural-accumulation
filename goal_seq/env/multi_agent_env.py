@@ -69,10 +69,10 @@ class MultiAgentEnv(object):
         obs_re, states_re = self.reset_env(key_reset, states_st.trial)
         
         # Auto-reset environment based on termination
-        states = jax.tree_map(
+        states = jax.tree.map(
             lambda x, y: jax.lax.select(dones, x, y), states_re, states_st
         )
-        obs = jax.tree_map(
+        obs = jax.tree.map(
             lambda x, y: jax.lax.select(dones, x, y), obs_re, obs_st
         )
         return obs, states, rewards, dones, infos #, other_actions
@@ -150,10 +150,10 @@ class SingleAgentEnv(object):
         obs_re, states_re = self.reset_env(key_reset)
 
         # Auto-reset environment based on termination
-        states = jax.tree_map(
+        states = jax.tree.map(
             lambda x, y: jax.lax.select(dones, x, y), states_re, states_st
         )
-        obs = jax.tree_map(
+        obs = jax.tree.map(
             lambda x, y: jax.lax.select(dones, x, y), obs_re, obs_st
         )
         return obs, states, rewards, dones, infos

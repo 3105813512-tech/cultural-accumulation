@@ -262,7 +262,7 @@ class GoalSequence(MultiAgentEnv):
             # Only observe object component
             obs_map = map[:, :, 0]
             # Convert indices to objects
-            obs_map = jax.tree_map(lambda idx: OBJECT_ARRAY[idx], obs_map)
+            obs_map = jax.tree.map(lambda idx: OBJECT_ARRAY[idx], obs_map)
             # Observe different goal colours
             obs_map = obs_map.at[
                         pad + state.goals_pos[:, 1], pad + state.goals_pos[:, 0], :].set(
